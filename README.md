@@ -22,3 +22,10 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+Список сущностей:
+1. Пользователи
+2. Тесты
+3. Вопросы
+4. Ответы
+5. Результаты
