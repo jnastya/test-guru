@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 20181111222104) do
     t.integer "test_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["test_id"], name: "index_test_passages_on_test_id"
+    t.index ["user_id"], name: "index_test_passages_on_user_id"
   end
 
   create_table "tests", force: :cascade do |t|
