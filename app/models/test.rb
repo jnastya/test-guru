@@ -14,6 +14,9 @@ class Test < ApplicationRecord
   scope :normal, -> { where(level: 2..4) }
   scope :difficult, -> { where(level: 5..Float::INFINITY) }
   scope :test_title, -> (category_title) { joins(:category).where(categories: { title: category_title }) }
-  scope :sorted_title, -> { :test_title.order(title: :desc) }
+
+  def self.sorted_title(category_title)
+    self.test_title.order(title: :desc).plack(:title)
+  end
 
 end
