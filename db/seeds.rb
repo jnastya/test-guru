@@ -6,11 +6,21 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-categories = Category.create([
-  { title: 'Frontend' }, { title: 'Backend' }, { title: 'Mobile Development' }
+Category.create([
+  { title: 'Frontend' },
+  { title: 'Backend' },
+  { title: 'Mobile Development' }
 ])
 
-tests = TEST.create([
+User.create([
+  { name: 'Aleks', email: 'aleks@gmail.com' },
+  { name: 'Olga', email: 'olga@gmail.com' },
+  { name: 'Vova', email: 'vov@gmail.com' },
+  { name: 'Elena', email: 'elena@gmail.com' },
+])
+
+categories = Category.all
+Test.create([
   { title: 'HTML', level: 1, category_id: categories[0].id },
   { title: 'GO', level: 2, category_id: categories[1].id },
   { title: 'Ruby', level: 1, category_id: categories[1].id },
@@ -18,7 +28,8 @@ tests = TEST.create([
   { title: 'Python', level: 2, category_id: categories[2].id }
 ])
 
-questions = Question.create([
+tests = Test.all
+Question.create([
   { body: 'Ruby is an object oriented general purpose programming language.', test_id: tests[2].id },
   { body: 'Which element is used for creating links??', test_id: tests[0].id },
   { body: 'Mathematical operations can be performed on a string. State whether true or false.', test_id: tests[4].id },
@@ -26,7 +37,8 @@ questions = Question.create([
   { body: 'Can we create an instance of Enum outside of Enum itself?', test_id: tests[3].id },
 ])
 
-answers = Answer.create([
+questions = Question.all
+Answer.create([
   { body: '<a>', question_id: questions[1].id, correct: true },
   { body: '<p>', question_id: questions[1].id },
   { body: '<li>', question_id: questions[1].id },
@@ -36,19 +48,13 @@ answers = Answer.create([
   { body: 'True', question_id: questions[2].id },
   { body: 'False', question_id: questions[2].id, correct: true },
   { body: 'Yes', question_id: questions[3].id, correct: true },
-  { body: 'No', question_id: questions[3].id }
+  { body: 'No', question_id: questions[3].id },
   { body: 'True', question_id: questions[2].id },
   { body: 'False', question_id: questions[2].id, correct: true },
 ])
 
-users = User.create([
-  { name: 'Aleks', age: 23 },
-  { name: 'Olga', age: 30 },
-  { name: 'Vova', age: 28 },
-  { name: 'Elena', age: 21 },
-])
-
-test_passages = TestPassage.create([
+users = User.all
+TestPassage.create([
   { user_id: users[0].id, test_id: tests[0].id },
   { user_id: users[0].id, test_id: tests[2].id },
   { user_id: users[1].id, test_id: tests[1].id },
