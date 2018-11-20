@@ -5,20 +5,15 @@ class Test < ApplicationRecord
   has_many :users, through: :test_passages
   belongs_to :author, class_name: "User"
 
-  validates :title, presence: true, uniqueness: true
+  validates :title, presence: true
+  validates :title, uniqueness: { scope: :level}
 
   validates :level, numericality: { only_integer: true }
 
   scope :easy, -> { where(level: 0..1) }
   scope :normal, -> { where(level: 2..4) }
   scope :difficult, -> { where(level: 5..Float::INFINITY) }
-  scope :test_title, -> (category_title) { joins(:category).where(categories: { title: category_title }).order(title: :desc).pluck(:title) }
+  scope :test_title, -> (category_title) { joins(:category).where(categories: { title: category_title }) }
+  scope :sorted_title, -> { :test_title.order(title: :desc) }
 
-
-  # def self.title(category_title)
-  #   joins('JOIN categories ON tests.category_id = categories.id')
-  #     .where(categories: { title: category_title })
-  #     .order(title: :desc)
-  #     .pluck(:title)
-  # end
 end

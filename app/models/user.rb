@@ -6,6 +6,6 @@ class User < ApplicationRecord
   validates :email, presence: true
 
   def tests_passage(level)
-    Test.joins(:test_passages).where(test_passages: {user_id: id }).where(tests: { level: level })
+    tests.where(level: level)
   end
 end
