@@ -10,6 +10,6 @@ class Answer < ApplicationRecord
   private
 
   def validate_amount_answers
-    errors.add(:question, 'Превышено количество допустимых ответов') if question.answers.size >= 4
+    errors.add(:question, 'Превышено количество допустимых ответов') if question.answers.size >= 4, on: :create
   end
 end
