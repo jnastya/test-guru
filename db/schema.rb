@@ -10,14 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181115075513) do
+ActiveRecord::Schema.define(version: 20181120171618) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "answers", force: :cascade do |t|
     t.string "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "correct", default: false
-    t.integer "question_id", null: false
+    t.bigint "question_id", null: false
     t.index ["question_id"], name: "index_answers_on_question_id"
   end
 
@@ -31,13 +34,13 @@ ActiveRecord::Schema.define(version: 20181115075513) do
     t.string "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "test_id", null: false
+    t.bigint "test_id", null: false
     t.index ["test_id"], name: "index_questions_on_test_id"
   end
 
   create_table "test_passages", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "test_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "test_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["test_id"], name: "index_test_passages_on_test_id"
@@ -49,10 +52,11 @@ ActiveRecord::Schema.define(version: 20181115075513) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "level", default: 0
-    t.integer "category_id", null: false
-    t.integer "author_id", null: false
+    t.bigint "category_id", null: false
+    t.bigint "author_id", null: false
     t.index ["author_id"], name: "index_tests_on_author_id"
     t.index ["category_id"], name: "index_tests_on_category_id"
+    t.index ["level", "title"], name: "index_tests_on_level_and_title", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,6 +64,12 @@ ActiveRecord::Schema.define(version: 20181115075513) do
     t.integer "age"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email", null: false
   end
 
+  add_foreign_key "answers", "questions"
+  add_foreign_key "questions", "tests"
+  add_foreign_key "test_passages", "tests"
+  add_foreign_key "test_passages", "users"
+  add_foreign_key "tests", "categories"
 end
