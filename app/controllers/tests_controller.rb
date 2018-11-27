@@ -14,7 +14,11 @@ class TestsController < ApplicationController
 
   def create
     @test = Test.create(test_params)
-    render plain: @test.inspect
+    if @test.save
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
   private
