@@ -6,5 +6,4 @@ Rails.application.routes.draw do
     resources :questions, shallow: true
   end
 
-  post '/questions' => 'questions#create'
 end
