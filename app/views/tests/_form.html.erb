@@ -1,0 +1,48 @@
+<%= form_with model: @test, local: true do |form| %>
+  <%= render 'shared/errors', resource: @test %>
+  <p>
+    <%= form.label :title %><br>
+    <%= form.text_field :title, id: :test_title %>
+  </p><br>
+
+  <p>
+    <%= form.label :level %><br>
+    <%= form.number_field :level, id: :test_level %>
+  </p>
+
+  <p>
+    <%= form.label :category_id %>:
+    <%= form.collection_select :category_id, Category.all, :id, :title, prompt: true %>
+  </p>
+
+  <p>
+    <%= form.label :author_id %>:
+    <%= form.collection_select :author_id, User.all, :id, :name, prompt: true %>
+  </p>
+
+  <p><%= form.submit %></p>
+<% end %>
+
+<!--
+<form action="/tests" method="post">
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden" />
+
+  <p>
+    <label for="test-title">Title:</label>
+    <input type="text" name="test[title]" id="test-title" />
+  </p><br>
+  <p>
+    <label for="test-level">Level:</label>
+    <input type="text" name="test[level]" id="test-level" />
+  </p><br>
+  <p>
+    <label for="test-category_id">Category:</label>
+    <input type="text" name="test[category_id]" id="test-category_id" />
+  </p><br>
+  <p>
+    <label for="test-author_id">Author:</label>
+    <input type="text" name="test[author_id]" id="test-author_id" />
+  </p><br>
+
+  <input type="submit" value="Create" />
+</form> -->
