@@ -3,8 +3,9 @@ class TestPassage < ApplicationRecord
   belongs_to :test
   belongs_to :current_question, class_name: 'Question', optional: true
 
-  before_validation :before_validation_set_first_question, on: :create
-  before_update :before_update_next_question, on: :update
+  before_validation :before_validation_set_question, on: %i[create update]
+
+  PASSAGE_PERCENT = 85
 
   def completed?
     current_question.nil?
@@ -23,7 +24,7 @@ class TestPassage < ApplicationRecord
   end
 
   def success?
-    total_result >= 85
+    total_result >= PASSAGE_PERCENT
   end
 
   def current_question_counter
@@ -32,12 +33,12 @@ class TestPassage < ApplicationRecord
 
   private
 
-  def before_validation_set_first_question
-    self.current_question = test.questions.first if test.present?
-  end
-
-  def before_update_next_question
-    self.current_question = next_question
+  def before_validation_set_question
+    self.current_question = if current_question.nil?
+                              test.questions.first
+                            else
+                              next_question
+                            end
   end
 
   def correct_answer?(answer_ids)
