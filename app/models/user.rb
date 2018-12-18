@@ -1,10 +1,15 @@
+require 'digest/sha1'
+
 class User < ApplicationRecord
 
   has_many :test_passages
   has_many :tests, through: :test_passages
   has_many :created_tests, class_name: "Test", foreign_key: "author_id"
 
-  validates :email, presence: true
+  has_secure_password
+
+  validates :email, uniqueness: true
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
 
   def tests_passage(level)
     tests.where(level: level)
