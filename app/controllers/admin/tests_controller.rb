@@ -1,5 +1,6 @@
 class Admin::TestsController < Admin::BaseController
 
+  before_action :admin_required!
   before_action :find_test, only: %i[edit show update destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :rescue_with_test_not_found
 
