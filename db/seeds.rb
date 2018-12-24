@@ -13,10 +13,7 @@ Category.create!([
 ])
 
 User.create!([
-  { name: 'Aleks', email: 'aleks@gmail.com' },
-  { name: 'Olga', email: 'olga@gmail.com' },
-  { name: 'Vova', email: 'vov@gmail.com' },
-  { name: 'Elena', email: 'elena@gmail.com' },
+  { first_name: 'Admin', last_name: 'Admin', email: 'admin@test.com', password: 'admintest', password_confirmation: 'admintest' }
 ])
 
 users = User.all
@@ -56,11 +53,11 @@ Answer.create!([
 
 users = User.all
 TestPassage.create!([
-  { user: users[1], test: tests[0] },
-  { user: users[1], test: tests[2] },
-  { user: users[1], test: tests[1] },
-  { user: users[2], test: tests[3] },
-  { user: users[2], test: tests[4] },
-  { user: users[3], test: tests[1] },
-  { user: users[3], test: tests[4] },
+  { user: users[0], test: tests[0] },
+  { user: users[0], test: tests[2] },
+  { user: users[0], test: tests[1] },
+  { user: users[0], test: tests[3] },
+  { user: users[0], test: tests[4] },
+  { user: users[0], test: tests[1] },
+  { user: users[0], test: tests[4] },
 ])
