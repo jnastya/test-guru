@@ -1,7 +1,6 @@
 class Admin::QuestionsController < Admin::BaseController
 
   before_action :authenticate_user!
-  before_action :admin_required!
   before_action :find_question, only: %i[edit show update destroy]
   before_action :find_test, only: %i[create new]
   rescue_from ActiveRecord::RecordNotFound, with: :rescue_with_question_not_found
