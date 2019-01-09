@@ -1,11 +1,11 @@
-<h1>The <%=@test_passage.test.title %> Test was Completed!</h1>
+<h1><%= t('.header', title: @test_passage.test.title) %></h1>
 
 <% if @test_passage.success? %>
-  <p>Congratulations! Test passed! </p>
-  <p>You result: <span class="success"><%= @test_passage.total_result %>%</p>
+  <p><%= t('.success') %> </p>
+  <p><%= t('.result') %> <span class="success"><%= @test_passage.total_result %>%</p>
 <% else %>
-  <p>Test failed</p>
-  <p>You result: <span class="fail"><%= @test_passage.total_result %>%</p>
+  <p><%= t('.failed') %></p>
+  <p><%= t('.result') %> <span class="fail"><%= @test_passage.total_result %>%</p>
 <% end %>
 
 <%= link_to 'All Tests', tests_path %>
