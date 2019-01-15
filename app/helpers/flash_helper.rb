@@ -1,6 +1,15 @@
 module FlashHelper
 
-  def flash_message
-    content_tag :p, flash[:alert], class: 'flash alert' if flash[:alert]
+  def flash_class(key)
+    case key.to_sym
+    when :notice
+      'alert alert-info'
+    when :success
+      'alert alert-success'
+    when :alert
+      'alert alert-warning'
+    when :error
+      'alert alert-danger'
+    end
   end
 end
