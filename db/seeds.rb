@@ -13,7 +13,7 @@ Category.create!([
 ])
 
 User.create!([
-  { first_name: 'Admin', last_name: 'Admin', email: 'admin@test.com', password: 'admintest', password_confirmation: 'admintest' }
+  { first_name: 'Admin', last_name: 'Admin', email: 'fomina.nst@gmail.com', password: 'admintest', password_confirmation: 'admintest', type: 'Admin' }
 ])
 
 users = User.all
