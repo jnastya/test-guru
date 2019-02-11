@@ -80,6 +80,8 @@ ru:
         new_question: "Новый вопрос"
         edit: "Редактировать"
         back: "Назад"
+      form_inline:
+        submit: "ОК"
 
   tests_mailer:
     completed_test:

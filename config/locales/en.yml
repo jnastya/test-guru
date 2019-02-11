@@ -78,6 +78,8 @@ en:
         new_question: "new question"
         edit: "Edit"
         back: "Back"
+      form_inline:
+        submit: "OK"
 
   tests_mailer:
     completed_test:
