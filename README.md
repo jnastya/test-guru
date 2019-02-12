@@ -29,4 +29,3 @@ Things you may want to cover:
 3. Вопросы
 4. Ответы
 5. Результаты
-6.
