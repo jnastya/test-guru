@@ -1,8 +1,8 @@
 class FeedbacksMailer < ApplicationMailer
 
-  def message (feedback)
-    @email = feedback.email
-    @message = feedback.message
+  def feed_mess(email, message)
+    @email = email
+    @message = message
 
     mail to: 'fomina.nst@gmail.com'
   end
