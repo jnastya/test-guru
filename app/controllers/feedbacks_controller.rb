@@ -9,9 +9,8 @@ class FeedbacksController < ApplicationController
 
     if feedback.save
 
-      binding.pry
       FeedbacksMailer.feed_mess(feedback.email, feedback.message).deliver_now
-      redirect_to new_feedback_path, notice: t('.success')
+      redirect_to root_path, notice: t('.success')
     else
       render :new, alert: t('.fail')
     end
