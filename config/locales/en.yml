@@ -88,3 +88,10 @@ en:
   services:
     gist_question_service:
       discription: "A question about: %{title} from TestGuru"
+
+    feedbacks:
+      create:
+        success: "Your message has been successfully sent!"
+        fail: "Message not sent. Please try again."
+      form:
+        coment: "Your comment"

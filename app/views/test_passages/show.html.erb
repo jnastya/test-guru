@@ -1,27 +1,34 @@
 <h1><%= t('.header', title: @test_passage.test.title) %></h1>
 
-<div class="progress">
-  <div class="progress-bar" id="progress-bar" data-progress="<%= @test_passage.total_result %>" aria-valuemax="100">
-    <%= @test_passage.total_result %>%
+<% if @test_passage.current_question.present? %>
+
+  <div class="progress">
+    <div class="progress-bar" id="progress-bar" data-progress="<%= @test_passage.total_result %>" aria-valuemax="100">
+      <%= @test_passage.total_result %>%
+    </div>
   </div>
-</div>
 
-<p>
-  <b><%= @test_passage.current_question.body %></b>
-</p>
+  <p>
+    <b><%= @test_passage.current_question.body %></b>
+  </p>
 
-<p>
-  <%= t('.questions', current_question_counter: @test_passage.current_question_counter, questions_count: @test_passage.test.questions.count) %>
-</p>
+  <p>
+    <%= t('.questions', current_question_counter: @test_passage.current_question_counter, questions_count: @test_passage.test.questions.count) %>
+  </p>
 
-<%= form_with url: test_passage_path(@test_passage), local: true, method: :put do |form| %>
-  <%= form.collection_check_boxes :answer_ids, @test_passage.current_question.answers, :id, :body, include_hidden: false do |b| %>
-    <p>
-      <%= b.check_box id: "answer_ids_#{b.object.id}" %>
-      <%= b.label %>
-    </p>
+  <% if @test_passage.current_question.answers.present? %>
+    <%= form_with url: test_passage_path(@test_passage), local: true, method: :put do |form| %>
+      <%= form.collection_check_boxes :answer_ids, @test_passage.current_question.answers, :id, :body, include_hidden: false do |b| %>
+        <p>
+          <%= b.check_box id: "answer_ids_#{b.object.id}" %>
+          <%= b.label %>
+        </p>
+      <% end %>
+
+      <p><%= link_to 'Gist Question', gist_test_passage_path(@test_passage), method: :post %></p>
+      <p><%= form.submit t('.next') %></p>
+    <% end %>
   <% end %>
-
-  <p><%= link_to 'Gist Question', gist_test_passage_path(@test_passage), method: :post %></p>
-  <p><%= form.submit t('.next') %></p>
 <% end %>
+
+<%= link_to 'Back', tests_path %>
